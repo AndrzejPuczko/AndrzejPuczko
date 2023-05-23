@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import CourseGoalList from './components/CourseGoals/CourseGoalList/CourseGoalList'
 import CourseInput from './components/CourseGoals/CourseInput/CourseInput'
-import styles from './App.modules.scss'
+import './App.modules.scss'
 
 const App = () => {
 	const [courseGoals, setCourseGoals] = useState([
