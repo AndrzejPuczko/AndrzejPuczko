@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, Fragment } from 'react'
 
 import './App.module.scss'
 import AddUser from './components/Users/AddUser'
@@ -9,16 +9,14 @@ const App = () => {
 
 	const addUserHandler = generatedUser => {
 		setUsersList(prevUsersList => {
-			const updatedUsers = [...prevUsersList]
-			updatedUsers.unshift(generatedUser)
-			return updatedUsers
+			return [...prevUsersList, generatedUser]
 		})
 	}
 	return (
-		<div>
-			<AddUser generate={addUserHandler} />
+		<Fragment>
+			<AddUser onAddUser={addUserHandler} />
 			<UsersList users={usersList} />
-		</div>
+		</Fragment>
 	)
 }
 
