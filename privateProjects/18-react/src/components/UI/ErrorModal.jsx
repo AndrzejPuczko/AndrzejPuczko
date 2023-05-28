@@ -27,8 +27,8 @@ const ModalOverlay = props => {
 const ErrorModal = props => {
 	return (
 		<Fragment>
-			{ReactDOM.createPortal(<Backdrop error={props.error}/>, document.querySelector('#backdrop-root'))}
-            {ReactDOM.createPortal(<ModalOverlay title={props.title} message={props.message} error={props.error} />, document.querySelector('#overlay-root'))}
+			{ReactDOM.createPortal(<Backdrop error={props.error}/>, document.getElementById('backdrop-root'))}
+            {ReactDOM.createPortal(<ModalOverlay title={props.title} message={props.message} error={props.error} />, document.getElementById('overlay-root'))}
 		</Fragment>
 	)
 }
