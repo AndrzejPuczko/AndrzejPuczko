@@ -1,29 +1,30 @@
-
 import styles from './ResultsTable.module.css'
 
-const ResultsTable = props => {
-    return (
-        <table className={styles.result}>
-        <thead>
-          <tr>
-            <th>Year</th>
-            <th>Total Savings</th>
-            <th>Interest (Year)</th>
-            <th>Total Interest</th>
-            <th>Invested Capital</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>YEAR NUMBER</td>
-            <td>TOTAL SAVINGS END OF YEAR</td>
-            <td>INTEREST GAINED IN YEAR</td>
-            <td>TOTAL INTEREST GAINED</td>
-            <td>TOTAL INVESTED CAPITAL</td>
-          </tr>
-        </tbody>
-      </table>
-    )
+const ResultsTable = ({ investmentData }) => {
+	return (
+		<table className={styles.result}>
+			<thead>
+				<tr>
+					<th>Year</th>
+					<th>Total Savings</th>
+					<th>Interest (Year)</th>
+					<th>Total Interest</th>
+					<th>Invested Capital</th>
+				</tr>
+			</thead>
+			<tbody>
+				{investmentData.map((item, index) => (
+					<tr key={index}>
+						<td>{item.year}</td>
+						<td>${item.savingsEndOfYear}</td>
+						<td>${item.yearlyInterest}</td>
+						<td>${(item.savingsEndOfYear - item.investedCapital).toFixed(2)}</td>
+						<td>${item.investedCapital}</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	)
 }
 
-export default ResultsTable;
+export default ResultsTable
