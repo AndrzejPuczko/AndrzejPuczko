@@ -24,14 +24,19 @@ const DUMMY_MEALS = [
 	},
 ]
 const AvailableMeals = () => {
-
 	const [meals, setMeals] = useState([])
+	const [isLoading, setIsLoading] = useState(true)
+	const [error, setError] = useState()
 
 	useEffect(() => {
 		const fetchMeals = async () => {
 			const response = await fetch('https://my-test-project-2242-default-rtdb.firebaseio.com/meals.json')
-			const responseData = await response.json()
 
+			if (!response.ok) {
+				throw new Error('Something went wrong')
+			}
+
+			const responseData = await response.json()
 			const loadedMeals = []
 
 			for (const key in responseData) {
@@ -42,15 +47,33 @@ const AvailableMeals = () => {
 					price: responseData[key].price,
 				})
 			}
-			
+			setMeals(loadedMeals)
+			setIsLoading(false)
 		}
-		fetchMeals()
-		
+
+		fetchMeals().catch(errorMsg => {
+			setIsLoading(false)
+			setError(errorMsg.message)
+		})
 	}, [])
 
+	if (isLoading) {
+		return (
+			<section className={styles.loadingClass}>
+				<p>Loading ...</p>
+			</section>
+		)
+	}
 
+	if (error) {
+		return (
+			<section className={styles.mealsError}>
+				<p>{error}</p>
+			</section>
+		)
+	}
 
-	const mealsList = meals.map(meal => <MealItem key={id} id={id} name={meal.name} description={meal.description} price={meal.price} />)
+	const mealsList = meals.map(meal => <MealItem key={meal.id} id={meal.id} name={meal.name} description={meal.description} price={meal.price} />)
 
 	return (
 		<section className={styles.meals}>
