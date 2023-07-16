@@ -53,6 +53,7 @@ const Cart = props => {
 		})
 		setIsSubmitting(false)
 		setDidSubmit(true)
+		cartCtx.clearCard()
 	}
 
 	const modalActions = (
