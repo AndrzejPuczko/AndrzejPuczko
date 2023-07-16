@@ -22,3 +22,15 @@
 		transform: translateY(0);
 	}
 }
+
+.loadingClass {
+	text-align: center;
+	font-size: 25px;
+	color: #fff;
+	padding-top:20px;
+}
+
+.mealsError {
+	text-align: center;
+	color: red;
+}
